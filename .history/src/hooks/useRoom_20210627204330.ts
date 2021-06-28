@@ -13,7 +13,7 @@ interface Questions{
     isHighlated:boolean
     id:string
     likeCount:number;
-    likedId:string | undefined;
+    likedId:string;
 }
 
 type QuestionProps = Record<string,{
@@ -49,7 +49,7 @@ export function useRoom(roomId:string){
                     isHighlated:value.isHighlated,
                     isAnswered:value.isAnswered,
                     likeCount:Object.values(value.likes ?? {}).length,
-                    likedId:Object.entries(value.likes ?? {}).find(([key,value]) =>value.authorId === user?.id)?.[0]
+                    likedId:Object.entries(value.likes ?? {}).some(([key,value]) =>value.authorId === user?.id)
                 }
             })
             setTitle(questionRoom.title)

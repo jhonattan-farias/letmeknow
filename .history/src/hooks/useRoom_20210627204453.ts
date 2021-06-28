@@ -13,7 +13,7 @@ interface Questions{
     isHighlated:boolean
     id:string
     likeCount:number;
-    likedId:string | undefined;
+    likedId:string;
 }
 
 type QuestionProps = Record<string,{

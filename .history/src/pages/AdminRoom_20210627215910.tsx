@@ -1,9 +1,7 @@
 import { useState } from 'react'
-import {useHistory, useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom'
 
 import logoImg from '../assets/logo.svg'
-import deleteImg from '../assets/delete.svg'
-
 import { Button } from '../components/Button'
 import { Question } from '../components/Question'
 import { RoomCode } from '../components/RoomCode'
@@ -18,25 +16,11 @@ interface RoomParams{
 }
 
 export function AdminRoom(){
-    const history = useHistory()
     const params = useParams<RoomParams>()
     const {user} = useAuth()
     const [question,setQuestion] = useState('')
     const roomId = params.id
     const {questions,title} = useRoom(roomId)
-
-    async function handleEndRoom(){
-        await database.ref(`rooms/${roomId}`).update({
-            endedAt:new Date()
-        })
-        history.push('/')
-    }
-
-    async function handleDeleteQuestion(questionId:string){
-        if(window.confirm('tem certeza?')){
-            await database.ref(`rooms/${roomId}/questions/${questionId}`).remove()
-        }
-    }
 
     return (
         <div id="page-room">
@@ -45,7 +29,7 @@ export function AdminRoom(){
                     <img src={logoImg} alt="letmeknow" />
                     <div>
                         <RoomCode code={params.id} />
-                        <Button isOutlined onClick={handleEndRoom}>Encerrar Sala</Button>
+                        <Button isOutlined>Encerrar Sala</Button>
                     </div>
                 </div>
 
@@ -63,12 +47,8 @@ export function AdminRoom(){
                     content={question.content}
                     author={question.author}
             >
-                <button
-                    type='button'
-                    onClick={() => handleDeleteQuestion(question.id)}
-                >
-                    <img src={deleteImg}/>
-
+                <button>
+                    
                 </button>
             </Question>
                 )

@@ -13,7 +13,7 @@ interface Questions{
     isHighlated:boolean
     id:string
     likeCount:number;
-    likedId:string | undefined;
+    hasLiked:boolean;
 }
 
 type QuestionProps = Record<string,{
@@ -35,7 +35,7 @@ export function useRoom(roomId:string){
     const [title,setTitle] = useState('')
 
     useEffect(() => {
-        const roomRef = database.ref(`rooms/${roomId}`) 
+        const roomRef = database.ref(`rooms/${roomId}`)
 
         roomRef.on('value',room => {
             const questionRoom = room.val()
@@ -49,7 +49,7 @@ export function useRoom(roomId:string){
                     isHighlated:value.isHighlated,
                     isAnswered:value.isAnswered,
                     likeCount:Object.values(value.likes ?? {}).length,
-                    likedId:Object.entries(value.likes ?? {}).find(([key,value]) =>value.authorId === user?.id)?.[0]
+                    likeid:Object.entries(value.likes ?? {}).some(([key,value]) =>value. === user?.id)
                 }
             })
             setTitle(questionRoom.title)

@@ -36,10 +36,7 @@ export function Home() {
             return
         }
 
-        if(roomRef.val().endedAt){
-            alert('room was finished')
-            return
-        }
+        if(roomRef.val().endedAt)
 
         history.push(`/rooms/${input}`)
     }

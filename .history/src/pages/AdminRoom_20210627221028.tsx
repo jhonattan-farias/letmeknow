@@ -29,13 +29,15 @@ export function AdminRoom(){
         await database.ref(`rooms/${roomId}`).update({
             endedAt:new Date()
         })
-        history.push('/')
+
     }
 
     async function handleDeleteQuestion(questionId:string){
         if(window.confirm('tem certeza?')){
             await database.ref(`rooms/${roomId}/questions/${questionId}`).remove()
         }
+
+        history.push('/')
     }
 
     return (
@@ -45,7 +47,7 @@ export function AdminRoom(){
                     <img src={logoImg} alt="letmeknow" />
                     <div>
                         <RoomCode code={params.id} />
-                        <Button isOutlined onClick={handleEndRoom}>Encerrar Sala</Button>
+                        <Button isOutlined>Encerrar Sala</Button>
                     </div>
                 </div>
 

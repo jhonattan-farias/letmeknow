@@ -25,6 +25,8 @@ export function Home() {
     const enterRoom = async (e:FormEvent) => {
         e.preventDefault()
 
+        if(database.ref(`rooms/${}`))
+
         if(input.trim() === ''){
             return
         }
@@ -33,11 +35,6 @@ export function Home() {
 
         if(!roomRef.exists()){
             alert('room doesnt not exist')
-            return
-        }
-
-        if(roomRef.val().endedAt){
-            alert('room was finished')
             return
         }
 

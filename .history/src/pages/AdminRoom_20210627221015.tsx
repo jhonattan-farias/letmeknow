@@ -18,7 +18,7 @@ interface RoomParams{
 }
 
 export function AdminRoom(){
-    const history = useHistory()
+    const history = useHis
     const params = useParams<RoomParams>()
     const {user} = useAuth()
     const [question,setQuestion] = useState('')
@@ -29,7 +29,7 @@ export function AdminRoom(){
         await database.ref(`rooms/${roomId}`).update({
             endedAt:new Date()
         })
-        history.push('/')
+
     }
 
     async function handleDeleteQuestion(questionId:string){
@@ -45,7 +45,7 @@ export function AdminRoom(){
                     <img src={logoImg} alt="letmeknow" />
                     <div>
                         <RoomCode code={params.id} />
-                        <Button isOutlined onClick={handleEndRoom}>Encerrar Sala</Button>
+                        <Button isOutlined>Encerrar Sala</Button>
                     </div>
                 </div>
 
