@@ -18,10 +18,10 @@ export function Question({
     author,
     children,
     isAnswered,
-    ishighlated
+    is
 }:QuestionProps){
     return (
-        <div className={`question ${ishighlated && !isAnswered ? 'highlated' : ''} ${isAnswered ? 'answered' : ''}`}>
+        <div className="question">
             <p>
                 {content}
             </p>

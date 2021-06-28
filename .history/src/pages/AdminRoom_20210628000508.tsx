@@ -92,7 +92,7 @@ export function AdminRoom(){
                         >
                             <img src={checkImg}/>
 
-                        </button>
+                    </button>
                     </>
                 )}
                 <button

@@ -9,19 +9,14 @@ interface QuestionProps{
         avatar:string
     }
     children?:ReactNode
-    isAnswered:boolean
-    ishighlated:boolean
+    isAnswerd
 }
 
 export function Question({
     content,
-    author,
-    children,
-    isAnswered,
-    ishighlated
-}:QuestionProps){
+    author,children}:QuestionProps){
     return (
-        <div className={`question ${ishighlated && !isAnswered ? 'highlated' : ''} ${isAnswered ? 'answered' : ''}`}>
+        <div className="question">
             <p>
                 {content}
             </p>

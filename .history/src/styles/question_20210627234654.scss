@@ -8,17 +8,13 @@
         margin-top: 8px;
     }
 
-    &.highlated{
+    &.isHishlated{
         background:#F4F0ff;
-        border:solid 1px #835AFD;
-
-        footer .user-info span{
-            color:#29292e;
-        }
+        border:solid 1px #83AFD;
     }
 
-    &.answered{
-        background:#DBDCDD;
+    &.isAnswered{
+
     }
 
     p{

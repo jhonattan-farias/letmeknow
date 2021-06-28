@@ -22,6 +22,8 @@ interface RoomParams{
 export function AdminRoom(){
     const history = useHistory()
     const params = useParams<RoomParams>()
+    const {user} = useAuth()
+    const [question,setQuestion] = useState('')
     const roomId = params.id
     const {questions,title} = useRoom(roomId)
 
@@ -38,16 +40,12 @@ export function AdminRoom(){
         }
     }
 
-    async function handleHighlightQuestion(questionId:string){
-        await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
-            isHighlated:true
-        })
+    async function handleHighlightQuestion(questionId){
+        await database.ref(`rooms/${roomId}/questions/${questionId}`).remove()
     }
 
-    async function handleCheckQuestionAsAnswered(questionId:string){
-        await database.ref(`rooms/${roomId}/questions/${questionId}`).update({
-            isAnswered:true
-        })
+    async function handleCheckQuestionAsAnswered(questionId){
+
     }
 
     return (
@@ -74,27 +72,21 @@ export function AdminRoom(){
                     key={question.id}
                     content={question.content}
                     author={question.author}
-                    isAnswered={question.isAnswered}
-                    ishighlated={question.isHighlated}
             >
-                {!question.isAnswered && (
-                    <>
-                        <button
-                            type='button'
-                            onClick={() => handleCheckQuestionAsAnswered(question.id)}
-                        >
-                            <img src={answerImg}/>
+                <button
+                    type='button'
+                    onClick={() => handleCheckQuestionAsAnswered(question.id)}
+                >
+                    <img src={answerImg}/>
 
-                        </button>
-                        <button
-                            type='button'
-                            onClick={() => handleHighlightQuestion(question.id)}
-                        >
-                            <img src={checkImg}/>
+                </button>
+                <button
+                    type='button'
+                    onClick={() => handleHighlightQuestion(question.id)}
+                >
+                    <img src={checkImg}/>
 
-                        </button>
-                    </>
-                )}
+                </button>
                 <button
                     type='button'
                     onClick={() => handleDeleteQuestion(question.id)}
